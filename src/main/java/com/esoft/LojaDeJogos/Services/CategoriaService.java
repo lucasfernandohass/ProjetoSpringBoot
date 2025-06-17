@@ -29,7 +29,7 @@ public class CategoriaService {
     @Transactional
     public CategoriaDTO atualizar(Long id, CategoriaDTO categoriaDTO){
         Categoria existente = categoriaRepository.findById(id)
-            .orElseThrow(() -> new NaoEncontradoException("Cateogira com id " + id +"não encotrada."));
+            .orElseThrow(() -> new NaoEncontradoException("Categoria com id " + id +"não encotrada."));
         existente.setNome(categoriaDTO.nome());
         existente.setDescricao(categoriaDTO.descricao());
 
