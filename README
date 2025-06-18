@@ -1,0 +1,73 @@
+--- Documentação --- 
+
+API de uma Loja de Jogos
+
+URL: htpps://localhost:8080/...
+
+ -- Entidades com EndPoints --
+
+ - Categoria (/categorias)
+
+GET /categorias
+GET /categorias/{id}
+POST /categorias
+Body esperado:
+{
+   "nome": "",
+   "descricao": ""
+}
+PUT /categorias/{id}
+DELETE /categorias/{id}
+
+ - Jogo (/jogos)
+
+GET /jogos
+GET /jogos/{id}
+POST /jogos
+##PRECISA DA EXISTENCIA DE UM DESENVOLVEDOR E DISTRIBUIDOR ANTES DE CRIAR O JOGO
+Body esperado:
+{
+   "nome": "",
+   "desenvolvedorId": ,
+   "distribuidoraId": ,
+   "categoriasIds": []
+}
+PUT /jogos/{id}
+DELETE /jogos/{id}
+
+ - Desenvolvedor (/desenvolvedores)
+
+GET /desenvolvedores
+GET /desenvolvedores/{id}
+POST /desenvolvedores
+Body esperado:
+{
+   "nome":""
+}
+PUT /desenvolvedores/{id}
+DELETE /desenvolvedores/{id}
+
+ - Distribuidora (/distribuidoras)
+
+GET /distribuidoras
+GET /distribuidoras/{id}
+POST /distribuidoras
+Body esperado:
+{
+    "nome":""
+}
+PUT /distribuidoras{id}
+DELETE /distribuidoras/{id}
+
+ - Usuario (/usuarios)
+
+GET /usuarios
+GET /usuarios/{id}
+POST /usuarios
+Body esperado:
+{
+    "nome":"",
+    "jogosIds":
+}
+PUT /usuarios{id}
+DELETE /usuarios{id}

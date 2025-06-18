@@ -1,5 +1,7 @@
 package com.esoft.LojaDeJogos.models;
 
+import java.util.List;
+
 import com.esoft.LojaDeJogos.DTOs.DesenvolvedorDTO;
 
 import jakarta.persistence.Column;
@@ -7,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +31,8 @@ public class Desenvolvedor {
     @Column(nullable = false)
     private String nome;
     
-    //private List<Jogo> jogos;
+    @OneToMany(mappedBy = "desenvolvedor")
+    private List<Jogo> jogos;
 
     public Desenvolvedor(DesenvolvedorDTO desenvolvedor){
         this.id = desenvolvedor.id();

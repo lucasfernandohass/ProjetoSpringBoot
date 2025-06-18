@@ -4,11 +4,16 @@ import java.util.List;
 
 import com.esoft.LojaDeJogos.DTOs.JogoDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,18 +35,32 @@ public class Jogo {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Getter
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "desenvolvedor_id")
     private Desenvolvedor desenvolvedor;
 
-    @Column(nullable = false)
+    @Getter
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "distribuidora_id")
     private Distribuidora distribuidora;
 
+    @Getter
+    @Setter
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+        name = "jogo_categorias",
+        joinColumns = @JoinColumn(name = "jogo_id"),
+        inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
     private List<Categoria> categorias;
+
 
     public Jogo(JogoDTO jogo){
         this.id = jogo.id();
         this.nome = jogo.nome();
-        this.desenvolvedor = jogo.desenvolvedor();
-        this.distribuidora = jogo.distribuidora();
     }
+
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.esoft.LojaDeJogos.DTOs.DistribuidoraDTO;
-import com.esoft.LojaDeJogos.Expections.NaoEncontradoException;
+import com.esoft.LojaDeJogos.Exceptions.NaoEncontradoException;
 import com.esoft.LojaDeJogos.models.Distribuidora;
 import com.esoft.LojaDeJogos.repositories.DistribuidoraRepository;
 
@@ -21,17 +21,21 @@ public class DistribuidoraService {
     }
 
     @Transactional
-    public DistribuidoraDTO salvar(DistribuidoraDTO distribuidoraDTO){
-        Distribuidora distribuidora = new Distribuidora(distribuidoraDTO);
+    public DistribuidoraDTO salvar(DistribuidoraDTO distribuidoraDTO) {
+        Distribuidora distribuidora = new Distribuidora();
+        distribuidora.setNome(distribuidoraDTO.nome());
+        
         return new DistribuidoraDTO(distribuidoraRepository.save(distribuidora));
     }
 
-    @Transactional
-    public DistribuidoraDTO atualizar(Long id, DistribuidoraDTO distribuidoraDTO){
-        Distribuidora existente = distribuidoraRepository.findById(id)
-            .orElseThrow(() -> new NaoEncontradoException("Distribuidora com id " + id +"não encotrada."));
-        existente.setNome(distribuidoraDTO.nome());
 
+    @Transactional
+    public DistribuidoraDTO atualizar(Long id, DistribuidoraDTO distribuidoraDTO) {
+        Distribuidora existente = distribuidoraRepository.findById(id)
+            .orElseThrow(() -> new NaoEncontradoException("Distribuidora com id " + id + " não encontrada."));
+
+        existente.setNome(distribuidoraDTO.nome());
+        
         return new DistribuidoraDTO(distribuidoraRepository.save(existente));
     }
 
@@ -46,6 +50,7 @@ public class DistribuidoraService {
 
     @Transactional
     public void remover(Long id){
+        @SuppressWarnings("unused")
         Distribuidora distribuidora = distribuidoraRepository.findById(id)
             .orElseThrow(() -> new NaoEncontradoException("Distribuidora com id" +id+" não encontrada."));
         distribuidoraRepository.deleteById(id);

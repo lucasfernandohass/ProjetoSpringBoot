@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.esoft.LojaDeJogos.DTOs.CategoriaDTO;
-import com.esoft.LojaDeJogos.Expections.NaoEncontradoException;
+import com.esoft.LojaDeJogos.Exceptions.NaoEncontradoException;
 import com.esoft.LojaDeJogos.models.Categoria;
 import com.esoft.LojaDeJogos.repositories.CategoriaRepository;
 
@@ -47,6 +47,7 @@ public class CategoriaService {
 
     @Transactional
     public void remover(Long id){
+        @SuppressWarnings("unused")
         Categoria categoria = categoriaRepository.findById(id)
             .orElseThrow(() -> new NaoEncontradoException("Categoria com id" +id+" não encontrada."));
         categoriaRepository.deleteById(id);

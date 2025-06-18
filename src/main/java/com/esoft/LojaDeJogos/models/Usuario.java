@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +32,15 @@ public class Usuario {
 
     @Column(nullable = false)
     private String nome;
-
+    
+    @Getter
+    @Setter
+    @ManyToMany
+    @JoinTable(
+        name = "usuario_jogos",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "jogo_id")
+    )
     private List<Jogo> jogos;
 
     public Usuario(UsuarioDTO usuario){
