@@ -2,8 +2,6 @@ package com.esoft.LojaDeJogos.models;
 
 import java.util.List;
 
-import com.esoft.LojaDeJogos.DTOs.UsuarioDTO;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,8 +41,5 @@ public class Usuario {
     )
     private List<Jogo> jogos;
 
-    public Usuario(UsuarioDTO usuario){
-        this.id = usuario.id();
-        this.nome = usuario.nome();
-    }
+
 }
